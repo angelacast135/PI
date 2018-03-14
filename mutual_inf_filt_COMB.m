@@ -25,20 +25,24 @@ for kk=1:6
     for k=1:length(v_TimeStartEvts)
         t1=v_TimeStartEvts(k)*Fs-Fs*2;%1.5;
         t2=t1+Fs*1.5;
+        t3=v_TimeStartEvts(k)*Fs+Fs*0.5;
+        t4=t3+Fs*1.5;
         hold on,
-        subplot(221),plot(t1,x(t1),'go')
-        subplot(221),plot(t2,x(t2),'ko')
-        subplot(222),plot(t1,y(t1),'go')
-        subplot(222),plot(t2,y(t2),'ko')
+        subplot(221),plot(t3,x(t3),'go')
+        subplot(221),plot(t4,x(t4),'ko')
+        subplot(222),plot(t1,y(t1),'co')
+        subplot(222),plot(t2,y(t2),'ro')
     end
-    subplot(221), title(['Muscular contraction. Signal ',num2str(kk),' ',lab{1},' REV']),xlabel('Time (s)'),grid
-    subplot(222), title(['Muscular contraction. Signal ',num2str(k_2),' EMG REV']),xlabel('Time (s)'),grid
+    subplot(221), title(['Muscular contraction. Signal ',num2str(kk),' ',lab{1},' COMB']),xlabel('Time (s)'),grid
+    subplot(222), title(['Muscular contraction. Signal ',num2str(k_2),' EMG COMB']),xlabel('Time (s)'),grid
     %     figure
     mi_CM=zeros(1, length(v_TimeStartEvts));
     for k=1:length(v_TimeStartEvts)
         t1=v_TimeStartEvts(k)*Fs-Fs*2;%1.5;
-        t2=t1+Fs*1.5;   
-        mi_CM(k) = mutualinfo(x(t1:t2),y(t1:t2)); %Mutual information from MI folder
+        t2=t1+Fs*1.5;
+        t3=v_TimeStartEvts(k)*Fs+Fs*0.5;
+        t4=t3+Fs*1.5;        
+        mi_CM(k) = mutualinfo(x(t3:t4),y(t1:t2)); %Mutual information from MI folder
     end
     str_MI(kk).MI=mi_CM;
     str_MI(kk).MI_hist=hist(mi_CM,20);
@@ -46,9 +50,9 @@ for kk=1:6
     hold on,
     subplot(223),plot(mi_CM) %Plot of the Coherence vs. the frequencies (in hertz) at which Cxy is estimated
     hold on,
-    subplot(223),title('REV Mutual information')
+    subplot(223),title('COMB Mutual information')
     hold on,
-    subplot(224),hist(mi_CM,20),title('REV Histogram on Mutual Information')
+    subplot(224),hist(mi_CM,20),title('COMB Histogram on Mutual Information')
 %     pause
 end
- save(['./seminario5_MI/',signal_name,'_MI_signal',num2str(k_2),'REV.mat'], 'str_MI')
+ save(['./seminario5_MI/',signal_name,'_MI_signal',num2str(k_2),'COMB2.mat'], 'str_MI')

@@ -1,5 +1,5 @@
 format long
-signal_name='Lozeron130919';
+signal_name='Milani08092106';
 [st_Header, m_SignalsMat] = edfread([signal_name,'.edf']); % a=rand(1,10000); b=filtfilt(SOS, G, a); figure;plot(b)
 str_MI=struct; 
 for kk=1:6
@@ -51,4 +51,4 @@ for kk=1:6
     subplot(224),hist(mi_CM,20),title('Histogram on Mutual Information')
 %     pause
 end
-save(['./seminario5/',signal_name,'_MI_signal',num2str(k_2),'.mat'], 'str_MI')
+save(['./seminario5_MI/',signal_name,'_MI_signal',num2str(k_2),'.mat'], 'str_MI')
