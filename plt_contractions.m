@@ -33,8 +33,8 @@ for kk=1:6%%%%%%%%%%%%%%%%%%%%%%
     subplot(122),plot(y),
     hold on, subplot(122),plot(v_TimeStartEvts(k)*Fs,y(v_TimeStartEvts(k)*Fs),'r*')
     hold on, subplot(122), grid
-    hold on,subplot(121), title(['Muscular contraction. Signal ',num2str(kk),' ',lab{1},' MH']),xlabel('Points')
-    hold on,subplot(122), title(['Muscular contraction. Signal ',num2str(k_2),' EMG MH']),xlabel('Points')
+    hold on,subplot(121), title(['Muscular contraction. Signal ',num2str(kk),' ',lab{1},]),xlabel('Points')
+    hold on,subplot(122), title(['Muscular contraction. Signal ',num2str(k_2),' EMG']),xlabel('Points')
     for kkk=1:length(v_delay)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         for k=1:length(v_TimeStartEvts)
             if kkk==1

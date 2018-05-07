@@ -1,5 +1,5 @@
 format long
-oo=2; c_signal_name = cell(1,1);
+oo=1; c_signal_name = cell(1,1);
 c_signal_name{1} = 'Lozeron130919';
 c_signal_name{2} = 'Lozeron08092016';
 c_signal_name{3} = 'Milani08092106';
@@ -29,11 +29,11 @@ for kk = 1:6%%%%%%%%%%%%%%%%%%%%%%
         cc_AB_CM = zeros(1, length(v_TimeStartEvts));
         cc_BA_CM = zeros(1, length(v_TimeStartEvts));
         for k = 1:length(v_TimeStartEvts)
-            t1 = (v_TimeStartEvts(k)*Fs)-(Fs*2);%+(Fs*0.5);
+            t1 = (v_TimeStartEvts(k)*Fs)+(Fs*0.5);%-(Fs*2);
             t2 = t1+Fs*1.5;
             t3 = (v_TimeStartEvts(k)*Fs)-(Fs*2)+(v_delay(kkk)*25);
             t4 = t3+Fs*1.5;
-            R = corrcoef(x(t3:t4),y(t1:t2)); %Corrcoef
+            R = corrcoef(x(t1:t2),y(t3:t4)); %Corrcoef
             cc_AB_CM(k) = abs(R(3));
             cc_BA_CM(k) = abs(R(2));
         end
@@ -54,6 +54,6 @@ for kk = 1:6%%%%%%%%%%%%%%%%%%%%%%
     str_corrcoef(kk).mean_AB_cc = mean_AB_cc;
     str_corrcoef(kk).mean_BA_cc = mean_BA_cc;
     str_corrcoef(kk).time_means = time_mean_cc; 
-    str_corrcoef(kk).static = 'EMG'; 
+    str_corrcoef(kk).static = 'EEG_contraction'; 
  end
-save(['./seminario5_corrcoef/hists_2/',signal_name,'_cc_signal',num2str(k_2),'_1-',num2str(kk),'.mat'], 'str_corrcoef')
+save(['./seminario5_corrcoef/hists_1v2/',signal_name,'_cc_signal',num2str(k_2),'_1-',num2str(kk),'.mat'], 'str_corrcoef')

@@ -1,12 +1,12 @@
-oo=4; c_signal_name=cell(1,1);
+oo=2; c_signal_name=cell(1,1);
 c_signal_name{1}='Lozeron130919';
 c_signal_name{2}='Lozeron08092016';
 c_signal_name{3}='Milani08092106';
 c_signal_name{4}='Milani150916';
 signal_name=c_signal_name{oo};
-str_MI_1=load(['./seminario5_MI/hists_2/',signal_name,'_MI_signal8_1-6.mat']);
+str_MI_1=load(['./seminario5_MI/hists_1/',signal_name,'_MI_signal8_1-6.mat']);
 MI_hists_1=str_MI_1.str_MI;
-str_MI_2=load(['./seminario5_MI/hists_2/',signal_name,'_MI_signal8_1-6.mat']);
+str_MI_2=load(['./seminario5_MI/hists_1/',signal_name,'_MI_signal8_1-6.mat']);
 MI_hists_2=str_MI_2.str_MI;
 
 figure,

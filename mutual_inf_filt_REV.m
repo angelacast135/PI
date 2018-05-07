@@ -1,10 +1,10 @@
 format long
-signal_name='Milani08092106';
+signal_name='Diab1catalina';%'Milani08092106';
 [st_Header, m_SignalsMat] = edfread([signal_name,'.edf']); % a=rand(1,10000); b=filtfilt(SOS, G, a); figure;plot(b)
 str_MI=struct;
-for kk=1:6
+for kk=1%:6%%%%%%%%%%%%%%%%%%%%%%%%
     k_1 = kk; %signal EEG
-    k_2 = 8; %signal EMG
+    k_2 = 3; %signal EMG %%%%%%%%%%%%%%%%%%
     Fs = st_Header.samples(k_1);
     t = 0:1/Fs:1-1/Fs; %Time
     load('G.mat'), load('SOS.mat')
