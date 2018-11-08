@@ -1,5 +1,5 @@
 file_names = cell(1,1);
-k = 7;
+k = 7 ;
 file_names{1} = 'laurier_micka';
 file_names{2} = 'le_brun_david';
 file_names{3} = 'legrand_cyril';
@@ -10,5 +10,5 @@ file_names{7} = 'vlade_catalina_diab';
 
 name = file_names{k};
 [st_Header, m_SignalsMat] = edfread(['./CoherenceMario/',name,'.edf']);
-save(['st_Header_',name,'.mat'], 'st_Header')
-save(['m_SignalsMat_',name,'.mat'], 'm_SignalsMat')
+save(['./no_edf_files/st_Header_',name,'.mat'], 'st_Header')
+save(['./no_edf_files/m_SignalsMat_',name,'.mat'], 'm_SignalsMat')

@@ -11,7 +11,7 @@ import scipy.io as sio
 import pdb
 
 # m_SignalsMat_laurier_micka
-stn_record='laurier_micka'
+stn_record='vlade_catalina_diab'
 
 class struct_MI:
     def __init__(self, means_mi_p, times_p, my_name_p):
@@ -31,8 +31,10 @@ st_Header = st_Header[9]
 st_Header = st_Header[0]
 my_list = []
 my_name = []
-pdb.set_trace()
+v_delay = np.arange(0,60)
+
 for kk in range(0,6):
+    # pdb.set_trace()
     # x_mat = sio.loadmat('./no_edf_files/x_m_SignalsMat1.mat')
     # x = x_mat['x']
     x = m_signals_mat[kk] ###### EEG
@@ -41,20 +43,20 @@ for kk in range(0,6):
     # y = y_mat['y']
     y = m_signals_mat[7] ######## EMG
     # y = np.random.randn(len(y))*2.5
-    v_delay = np.arange(0,80)
+    
     mean_mi = []
     time_mean = []
     for kkk in range(0,len(v_delay)): #####################
         mi = []
-        for k in range(0,v_TimeStartEvts.shape[1]):
-            t1 = int((v_TimeStartEvts[0,k]*Fs)+(Fs*0.5)); # -(Fs*2));  ####################################
+        for k in range(2,v_TimeStartEvts.shape[1]-2): ###############################
+            t1 = int((v_TimeStartEvts[0,k]*Fs) + (Fs*0.5) ) #-(Fs*2)); # +(Fs*0.5));  ####################################
             t2 = int(t1+(Fs*1.5))
-            t3 = int((v_TimeStartEvts[0,k]*Fs)-(Fs*2)+(v_delay[kkk]*25)) 
+            t3 = int((v_TimeStartEvts[0,k]*Fs) - (Fs*2) + (v_delay[kkk]*25)) 
             t4 = int(t3+(Fs*1.5))
             xn = x[t1:t2]
             yn = y[t3:t4]
             mi.append(mt.normalized_mutual_info_score(xn, yn))
-        sio.savemat('./mi_delays/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
+        sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
         mean_mi.append(np.mean(mi))
         time_mean.append((v_delay[kkk]*25/256)-2)
     my_name.append(st_Header[kk][0])
@@ -68,7 +70,7 @@ for o in range(0, len(my_list)):
     means = a.means_mi
     myName = a.my_name
     # plt.figure(o)
-    plt.hold(True)
+    # plt.hold(True)
     plt.subplot(3,2,o+1)
     plt.plot(times,means)
     plt.ylabel('Norm_MI_Score')
