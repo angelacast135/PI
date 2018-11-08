@@ -11,4 +11,4 @@ file_names{7} = 'vlade_catalina_diab';
 name = file_names{k};
 [st_Header, m_SignalsMat] = edfread(['./CoherenceMario/',name,'.edf']);
 save(['st_Header_',name,'.mat'], 'st_Header')
-save(['m_SignalsMat_',name,'.mat'], 'st_Header')
+save(['m_SignalsMat_',name,'.mat'], 'm_SignalsMat')

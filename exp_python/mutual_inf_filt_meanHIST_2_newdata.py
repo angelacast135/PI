@@ -20,11 +20,11 @@ class struct_MI:
         self.my_name = my_name_p
 pdb.set_trace()
 Fs = 256
-events = sio.loadmat('./data/'+stn_record+'.mat')
+events = sio.loadmat('./no_edf_files/'+stn_record+'.mat')
 v_TimeStartEvts = events['v_TimeStartEvts']
-m_signals_mat = sio.loadmat('./data/m_SignalsMat_L13.mat')
+m_signals_mat = sio.loadmat('./no_edf_files/m_SignalsMat_'+stn_record+'.mat')
 m_signals_mat = m_signals_mat['m_SignalsMat']
-st_Header = sio.loadmat('./data/st_Header_L13.mat')
+st_Header = sio.loadmat('./no_edf_files/st_Header_'+stn_record+'.mat')
 st_Header = st_Header['st_Header']
 st_Header = st_Header[0]; st_Header = st_Header[0]
 st_Header = st_Header[9]
@@ -33,11 +33,11 @@ my_list = []
 my_name = []
 pdb.set_trace()
 for kk in range(0,6):
-    # x_mat = sio.loadmat('./data/x_m_SignalsMat1.mat')
+    # x_mat = sio.loadmat('./no_edf_files/x_m_SignalsMat1.mat')
     # x = x_mat['x']
     x = m_signals_mat[kk] ###### EEG
     # x = np.random.rand(len(x))*2.5
-    # y_mat = sio.loadmat('./data/y_m_SignalsMat8.mat')
+    # y_mat = sio.loadmat('./no_edf_files/y_m_SignalsMat8.mat')
     # y = y_mat['y']
     y = m_signals_mat[7] ######## EMG
     # y = np.random.randn(len(y))*2.5
@@ -54,7 +54,7 @@ for kk in range(0,6):
             xn = x[t1:t2]
             yn = y[t3:t4]
             mi.append(mt.normalized_mutual_info_score(xn, yn))
-        sio.savemat('./mi_delays/v_mi_L13_'+str(kkk)+'.mat', {'mi':mi})
+        sio.savemat('./mi_delays/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
         mean_mi.append(np.mean(mi))
         time_mean.append((v_delay[kkk]*25/256)-2)
     my_name.append(st_Header[kk][0])
