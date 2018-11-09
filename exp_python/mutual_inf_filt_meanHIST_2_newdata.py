@@ -54,10 +54,11 @@ for kk in range(0,6):
             t3 = int((v_TimeStartEvts[0,k]*Fs) - (Fs*2) + (v_delay[kkk]*25)) 
             t4 = int(t3+(Fs*1.5))
             xn = x[t1:t2]
-            yn = y[t3:t4]
+            # yn = y[t3:t4]
+            yn = x[t1:t2] # ENTRE ELLA MISMA
             mi.append(mt.normalized_mutual_info_score(xn, yn))
-        if kk == 0:
-            sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
+        # if kk == 0: ########################################################################################
+        #     sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
         mean_mi.append(np.mean(mi))
         time_mean.append((v_delay[kkk]*25/256)-2)
     my_name.append(st_Header[kk][0])
