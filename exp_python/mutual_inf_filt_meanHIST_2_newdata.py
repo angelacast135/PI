@@ -11,7 +11,7 @@ import scipy.io as sio
 import pdb
 
 # m_SignalsMat_laurier_micka
-stn_record='vlade_catalina_diab'
+stn_record='vialatte_clement'
 
 class struct_MI:
     def __init__(self, means_mi_p, times_p, my_name_p):
@@ -56,13 +56,14 @@ for kk in range(0,6):
             xn = x[t1:t2]
             yn = y[t3:t4]
             mi.append(mt.normalized_mutual_info_score(xn, yn))
-        sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
+        if kk == 0:
+            sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
         mean_mi.append(np.mean(mi))
         time_mean.append((v_delay[kkk]*25/256)-2)
     my_name.append(st_Header[kk][0])
     temp = struct_MI(mean_mi, time_mean,my_name)
     my_list.append(temp)
-pdb.set_trace()
+# pdb.set_trace()
 plt.figure()
 for o in range(0, len(my_list)):
     a = my_list[o]
