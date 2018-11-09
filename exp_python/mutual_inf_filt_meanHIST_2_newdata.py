@@ -11,7 +11,7 @@ import scipy.io as sio
 import pdb
 
 # m_SignalsMat_laurier_micka
-stn_record='vialatte_clement'
+stn_record='legrand_cyril'
 
 class struct_MI:
     def __init__(self, means_mi_p, times_p, my_name_p):
