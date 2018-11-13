@@ -11,11 +11,8 @@ import scipy.io as sio
 import pdb
 
 # m_SignalsMat_laurier_micka
-
-all_names = ['le_brun_david', 'legrand_cyril', 'thoraval_daniel', 'touboul_beatrice', 'vialatte_clement', 'vlade_catalina_diab']
-stn_record = all_names[5]
-
-print('The current subject is: '+stn_record)
+stn_record='legrand_cyril'
+print(stn_record)
 
 class struct_MI:
     def __init__(self, means_mi_p, times_p, my_name_p):
@@ -23,7 +20,6 @@ class struct_MI:
         self.times = times_p
         self.my_name = my_name_p
 pdb.set_trace()
-
 Fs = 256
 events = sio.loadmat('./no_edf_files/'+stn_record+'.mat')
 v_TimeStartEvts = events['v_TimeStartEvts']
@@ -37,6 +33,7 @@ st_Header = st_Header[0]
 my_list = []
 my_name = []
 v_delay = np.arange(0,60)
+EMG_raw = sio.loadmat('./EMG_raw_fft_phase/'+stn_record+'_EMG_fft_phase_signal.mat')
 
 for kk in range(0,6):
     # pdb.set_trace()
@@ -46,7 +43,8 @@ for kk in range(0,6):
     # x = np.random.rand(len(x))*2.5
     # y_mat = sio.loadmat('./no_edf_files/y_m_SignalsMat8.mat')
     # y = y_mat['y']
-    y = m_signals_mat[7] ######## EMG
+    # y = m_signals_mat[7] ######## EMG
+    y = EMG_raw['ytr'][0,:] ######## EMG
     # y = np.random.randn(len(y))*2.5
     
     mean_mi = []
@@ -58,8 +56,7 @@ for kk in range(0,6):
             t2 = int(t1+(Fs*1.5))
             t3 = int((v_TimeStartEvts[0,k]*Fs) - (Fs*2) + (v_delay[kkk]*25)) 
             t4 = int(t3+(Fs*1.5))
-            # xn = x[t1:t2]
-            xn = x[t3:t4]
+            xn = x[t1:t2]
             yn = y[t3:t4]
             # yn = x[t1:t2] # ENTRE ELLA MISMA
             mi.append(mt.normalized_mutual_info_score(xn, yn))
