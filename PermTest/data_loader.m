@@ -25,10 +25,10 @@ v_mean_Diab = mean(Diab);
 v_mean_L13 = mean(L13);
 v_time = ((1:length(v_mean_Diab)) * 25 / 256) - 2;
 figure, plot(v_time ,v_mean_Diab)
-% hold on, plot(v_time,v_mean_L13)
+hold on, plot(v_time,v_mean_L13)
 grid on, title('Normalized Mutual Information')
 xlabel('time (s)'), ylabel('Norm MI Score')
-% legend('Diab', 'Lozeron08092016')
+legend('Diab', 'Lozeron08092016', 'Location', 'northeastoutside')
 %% Permutation test between Diab and L13
 [m,n] = size(Diab);
 st_PermTest = struct();
