@@ -58,11 +58,11 @@ for kk in range(0,6):
             t2 = int(t1+(Fs*1.5))
             t3 = int((v_TimeStartEvts[0,k]*Fs) - (Fs*2) + (v_delay[kkk]*25)) 
             t4 = int(t3+(Fs*1.5))
-            xn = x[t1:t2]
-            # xn = x[t3:t4]
+            # xn = x[t1:t2]
+            xn = x[t3:t4]
             # xn = np.random.rand(len(xn))
             yn = y[t3:t4]
-            # yn = np.random.rand(len(yn))
+            # yn = np.random.rand(len(xn))
             # yn = x[t1:t2] # ENTRE ELLA MISMA
             mi.append(mt.normalized_mutual_info_score(xn, yn))
             # mi.append(mt.mutual_info_score(xn, yn))
