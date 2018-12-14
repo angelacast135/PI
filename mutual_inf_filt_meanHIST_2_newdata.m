@@ -1,6 +1,6 @@
 format long
 
-oo = 7; 
+oo = 13; 
 c_signal_name = cell(1,1);
 c_signal_name{1} = 'Lozeron130919'; % contraction
 c_signal_name{2} = 'Lozeron08092016'; %NO contraction
@@ -14,9 +14,10 @@ c_signal_name{9} = 'touboul_beatrice';
 c_signal_name{10} = 'legrand_cyril';
 c_signal_name{11} = 'vialatte_clement';
 c_signal_name{12} = 'vlade_catalina_diab';
+c_signal_name{13} = 'LUOISON_MAURICE_DIAB';
 signal_name = c_signal_name{oo};
 
-[st_Header, m_SignalsMat] = edfread([signal_name,'.edf']);
+[st_Header, m_SignalsMat] = edfread(['../',signal_name,'.edf']);
 
 str_MI = struct;
 v_delay = 0:60; %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHANGEDDDD
