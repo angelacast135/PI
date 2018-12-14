@@ -4,7 +4,7 @@
 function f_SelectEventsGUI()
 
     clc
-    addpath('../../Functions/');
+%     addpath('../../Functions/');
 
     % str_FileName = 'testLaurence-tout-trace';
     % s_Inv = 1;
@@ -167,14 +167,14 @@ function f_SelectEventsGUI()
 %     s_SigInd = 8;
 %     s_PeakLevelTres = 10;  
 
-    str_FileName = 'laurier_micka';
+    str_FileName = 'LUOISON_MAURICE_DIAB';
     v_TimeSegs = [0 -1];
     s_SigInd = 8;
     s_PeakLevelTres = 10;  
 
 
-    str_FileFullName = ['./CoherenceMario/' str_FileName '.edf'];
-    str_DataFileName = ['./CoherenceMario/' str_FileName '.mat'];
+    str_FileFullName = ['../' str_FileName '.edf'];
+    str_DataFileName = ['../' str_FileName '.mat'];
 
     if ~exist(str_FileFullName, 'file')
         error('[p_DataAnalysis_01] - The following file does not exist: %s', ...

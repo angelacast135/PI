@@ -177,8 +177,7 @@ function f_SelectEventsGUI2()
     str_FileFullName = ['../' str_FileName '.edf'];
 %     str_FileFullName = ['./data/' str_FileName '.edf'];
 %     str_DataFileName = ['./CoherenceMario/' str_FileName '.mat'];
-%     str_DataFileName = ['./data/' str_FileName '.mat'];
-    str_DataFileName = ['../' str_FileName '.mat'];
+    str_DataFileName = ['./data/' str_FileName '.mat'];
 
     
     if ~exist(str_FileFullName, 'file')
@@ -274,7 +273,7 @@ function f_SelectEventsGUI2()
     s_MyMax = max(v_Peaks);
     v_IndsMin = v_IndLows(find(v_HistX(v_Ind(s_MyMax == v_Peaks)) < v_HistX(v_IndLows)));
     s_StdThres = v_HistX(v_IndsMin(1));
-%     s_StdThres = v_HistX(17); %%% this is done just for this patient. 
+    s_StdThres = v_HistX(17); %%% this is done just for this patient. 
 
     figure;
     plot(v_HistX, v_HistY)

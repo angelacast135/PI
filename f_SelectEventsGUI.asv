@@ -1,10 +1,10 @@
-% f_SelectEventsGUI2.m
-% edited
+% f_SelectEventsGUI.m
+% 
 
-function f_SelectEventsGUI2()
+function f_SelectEventsGUI()
 
     clc
-%     addpath('../../Functions/');
+    addpath('../../Functions/');
 
     % str_FileName = 'testLaurence-tout-trace';
     % s_Inv = 1;
@@ -169,18 +169,13 @@ function f_SelectEventsGUI2()
 
     str_FileName = 'LUOISON_MAURICE_DIAB';
     v_TimeSegs = [0 -1];
-    s_SigInd = 8; %%%%%%%%%%%%%%%%%%
-    s_PeakLevelTres = 10;
+    s_SigInd = 8;
+    s_PeakLevelTres = 10;  
 
-%     str_FileName = 'Diab1catalina';
-%     str_FileFullName = ['./CoherenceMario/' str_FileName '.edf'];
+
     str_FileFullName = ['../' str_FileName '.edf'];
-%     str_FileFullName = ['./data/' str_FileName '.edf'];
-%     str_DataFileName = ['./CoherenceMario/' str_FileName '.mat'];
-%     str_DataFileName = ['./data/' str_FileName '.mat'];
     str_DataFileName = ['../' str_FileName '.mat'];
 
-    
     if ~exist(str_FileFullName, 'file')
         error('[p_DataAnalysis_01] - The following file does not exist: %s', ...
             str_FileFullName);
@@ -189,8 +184,8 @@ function f_SelectEventsGUI2()
     [st_Header, m_SignalsMat] = edfread(str_FileFullName);
     s_SRate = st_Header.samples(1);
 
-    v_EMGSigs = m_SignalsMat(s_SigInd, :)'; % y_raw
-    v_Time = (0:size(v_EMGSigs, 1) - 1)./ s_SRate; %time
+    v_EMGSigs = m_SignalsMat(s_SigInd, :)';
+    v_Time = (0:size(v_EMGSigs, 1) - 1)./ s_SRate;
 
     st_Filt = f_GetIIRFilter(s_SRate, [10 30]);
     v_EMGFiltSigs = f_IIRBiFilter(v_EMGSigs, st_Filt);
@@ -256,8 +251,7 @@ function f_SelectEventsGUI2()
     end
 
     [v_HistY, v_HistX] = hist(v_SigTemp, 100);
-    [v_Peaks, v_Ind] = findpeaks(v_HistY); %, 'MinPeakProminence', 20);
-    [v_Lows, v_IndLows] = findpeaks(-1.* v_HistY);
+    [v_Peaks, v_Ind] = findpeaks(-1.* v_HistY);
     s_Ind = v_Ind(1);
     s_StdThres = v_HistX(v_Ind(1));
     s_Max = v_Peaks(1);
@@ -271,10 +265,6 @@ function f_SelectEventsGUI2()
             s_Max = v_Peaks(s_Counter);
         end
     end
-    s_MyMax = max(v_Peaks);
-    v_IndsMin = v_IndLows(find(v_HistX(v_Ind(s_MyMax == v_Peaks)) < v_HistX(v_IndLows)));
-    s_StdThres = v_HistX(v_IndsMin(1));
-%     s_StdThres = v_HistX(17); %%% this is done just for this patient. 
 
     figure;
     plot(v_HistX, v_HistY)
@@ -321,14 +311,10 @@ function f_SelectEventsGUI2()
     
     
     s_Fig = figure;
-    s_Axes_up = subplot(2,1,2);
+    s_Axes = subplot(1,1,1);
     plot(v_SigFiltTemp./ max(v_SigFiltTemp))
     hold on
     plot(v_SigTemp, 'r')    
-%     hold on, 
-%     sig_9 = m_SignalsMat(9,:);
-%     s_Axes_down = subplot(2,1,2);
-%     plot(sig_9./ max(sig_9))
     
     s_Counter = 1;
     while s_Counter <= size(v_IndStart, 1)
@@ -359,20 +345,13 @@ function f_SelectEventsGUI2()
             'YLim', v_Axe1Lims);
         
         
-        axes(s_Axes_up);
+        axes(s_Axes);
         xlim([s_FisrtSam s_LastSam]);
         ylim([-1.5 1.5]);
         hold on
         plot([v_IndStart(s_Counter, 1) v_IndStart(s_Counter, 1)], [-1.5 1.5], 'g');
         hold off
-%         %%%%%%%%%%%%%%
-%         axes(s_Axes_down);
-%         xlim([s_FisrtSam s_LastSam]);
-%         ylim([-1.5 1.5]);
-%         hold on
-%         plot([v_IndStart(s_Counter, 1) v_IndStart(s_Counter, 1)], [-1.5 1.5], 'g');
-%         hold off
-%         %%%%%%%%%%%%%%%%%%%%
+        
         s_W = 0;
         while s_W ~= 1
             s_W = waitforbuttonpress;
