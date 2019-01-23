@@ -3,7 +3,7 @@ import numpy as np
 import numpy.random as nprn
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from sklearn import metrics as mt
+from sklearn import metrics as mt   
 import math as math
 import array
 from scipy import signal
@@ -12,8 +12,8 @@ import pdb
 
 # m_SignalsMat_laurier_micka
 
-all_names = ['le_brun_david', 'legrand_cyril', 'thoraval_daniel', 'touboul_beatrice', 'vialatte_clement', 'vlade_catalina_diab']
-stn_record = all_names[5]
+all_names = ['le_brun_david', 'legrand_cyril', 'thoraval_daniel', 'touboul_beatrice', 'vialatte_clement', 'vlade_catalina_diab', 'LUOISON_MAURICE_DIAB']
+stn_record = all_names[6]
 
 print('The current subject is: '+stn_record)
 
@@ -53,18 +53,25 @@ for kk in range(0,6):
     time_mean = []
     for kkk in range(0,len(v_delay)): #####################
         mi = []
+        sum_contingency = 0
         for k in range(2,v_TimeStartEvts.shape[1]-2): ###############################
             t1 = int((v_TimeStartEvts[0,k]*Fs) + (Fs*0.5) ) #-(Fs*2)); # +(Fs*0.5));  ####################################
             t2 = int(t1+(Fs*1.5))
             t3 = int((v_TimeStartEvts[0,k]*Fs) - (Fs*2) + (v_delay[kkk]*25)) 
             t4 = int(t3+(Fs*1.5))
-            # xn = x[t1:t2]
-            xn = x[t3:t4]
+            xn = x[t1:t2]
+            # xn = x[t3:t4]
             # xn = np.random.rand(len(xn))
             yn = y[t3:t4]
             # yn = np.random.rand(len(xn))
             # yn = x[t1:t2] # ENTRE ELLA MISMA
+            # mi_score, contingency = mt.normalized_mutual_info_score(xn, yn)
+            # mi.append(mi_score)
             mi.append(mt.normalized_mutual_info_score(xn, yn))
+            # sum_contingency += contingency
+            # if k == 2:
+            #     _ , contingency = mt.normalized_mutual_info_score(xn, yn)
+            #     contingency = contingency.toarray()
             # mi.append(mt.mutual_info_score(xn, yn))
         # if kk == 0: ########################################################################################
         #     sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
