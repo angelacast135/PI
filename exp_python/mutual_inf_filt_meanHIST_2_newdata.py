@@ -73,8 +73,8 @@ for kk in range(0,6):
             #     _ , contingency = mt.normalized_mutual_info_score(xn, yn)
             #     contingency = contingency.toarray()
             # mi.append(mt.mutual_info_score(xn, yn))
-        # if kk == 0: ########################################################################################
-        #     sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
+        if kk == 0: ########################################################################################
+            sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
         mean_mi.append(np.mean(mi))
         time_mean.append((v_delay[kkk]*25/256)-2)
     my_name.append(st_Header[kk][0])
