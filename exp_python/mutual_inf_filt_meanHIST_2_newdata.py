@@ -11,9 +11,9 @@ import scipy.io as sio
 import pdb
 
 # m_SignalsMat_laurier_micka
-
-all_names = ['le_brun_david', 'legrand_cyril', 'thoraval_daniel', 'touboul_beatrice', 'vialatte_clement', 'vlade_catalina_diab', 'LUOISON_MAURICE_DIAB']
-stn_record = all_names[6]
+patient = 6
+all_names = ['le_brun_david', 'thoraval_daniel', 'touboul_beatrice', 'legrand_cyril', 'vialatte_clement', 'vlade_catalina_diab', 'LUOISON_MAURICE_DIAB']
+stn_record = all_names[patient]
 
 print('The current subject is: '+stn_record)
 
@@ -59,7 +59,7 @@ for kk in range(0,6):
             t2 = int(t1+(Fs*1.5))
             t3 = int((v_TimeStartEvts[0,k]*Fs) - (Fs*2) + (v_delay[kkk]*25)) 
             t4 = int(t3+(Fs*1.5))
-            xn = x[t1:t2]
+            xn = x[t3:t4]
             # xn = x[t3:t4]
             # xn = np.random.rand(len(xn))
             yn = y[t3:t4]
@@ -74,7 +74,7 @@ for kk in range(0,6):
             #     contingency = contingency.toarray()
             # mi.append(mt.mutual_info_score(xn, yn))
         if kk == 0: ########################################################################################
-            sio.savemat('./mi_delays_newdata/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
+            sio.savemat('./mi_delays_newdata_movingbothwindows/v_mi_'+ stn_record +'_'+str(kkk)+'.mat', {'mi':mi})
         mean_mi.append(np.mean(mi))
         time_mean.append((v_delay[kkk]*25/256)-2)
     my_name.append(st_Header[kk][0])
@@ -92,7 +92,7 @@ for o in range(0, len(my_list)):
     plt.subplot(3,2,o+1)
     plt.plot(times,means)
     plt.ylabel('Norm_MI_Score')
-    plt.title('Mutual Information, '+myName[o]) #+', '+stn_record)
+    plt.title('Mutual Information, '+myName[o] + ', subject ' + str(patient+7)) #+', '+stn_record)
     if o+1<5:
         plt.xticks([])
     else:
