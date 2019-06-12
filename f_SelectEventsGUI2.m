@@ -167,7 +167,7 @@ function f_SelectEventsGUI2()
 %     s_SigInd = 8;
 %     s_PeakLevelTres = 10;  
 
-    str_FileName = 'june19_data/YA diabete';
+    str_FileName = 'june19_data/BA_diabete';
     v_TimeSegs = [0 -1];
     s_SigInd = 8; %%%%%%%%%%%%%%%%%%
     s_PeakLevelTres = 10;
@@ -265,14 +265,15 @@ function f_SelectEventsGUI2()
         if v_HistX(v_Ind(s_Counter)) >= s_PeakLevelTres
             break;
         end
-        if v_Peaks(s_Counter) > s_Max
+        if v_Peaks(s_Counter) >= s_Max
             s_Ind = v_Ind(s_Counter);
             s_StdThres = v_HistX(s_Ind);
             s_Max = v_Peaks(s_Counter);
         end
     end
     s_MyMax = max(v_Peaks);
-    v_IndsMin = v_IndLows(find(v_HistX(v_Ind(s_MyMax == v_Peaks)) < v_HistX(v_IndLows)));
+    v_maxPeak = v_HistX(v_Ind(s_MyMax == v_Peaks));
+    v_IndsMin = v_IndLows(find(v_maxPeak(end) < v_HistX(v_IndLows)));
     s_StdThres = v_HistX(v_IndsMin(1));
 %     s_StdThres = v_HistX(17); %%% this is done just for this patient. 
 

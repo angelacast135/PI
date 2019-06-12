@@ -1,6 +1,6 @@
 st_slide = dir(fullfile('../PI/exp_python/mi_delays_newdata_movingbothwindows')); %%%%%%%%%%%%%%%%
 st_slide(1:2) = [];
-oo = 14;
+oo = 12;
 c_signal_name = cell(1,1);
 c_signal_name{1} = 'Lozeron130919'; % contraction
 c_signal_name{2} = 'Lozeron08092016'; %NO contraction
@@ -15,7 +15,7 @@ c_signal_name{10} = 'legrand_cyril';
 c_signal_name{11} = 'vialatte_clement';
 c_signal_name{12} = 'vlade_catalina_diab';
 c_signal_name{13} = 'LUOISON_MAURICE_DIAB';
-c_signal_name{14} = 'CM_diabete';
+c_signal_name{14} = 'CM_diabe';
 signal_name = c_signal_name{oo};
 check_name = split(signal_name, '_');
 
@@ -24,14 +24,14 @@ for k = 1:length(st_slide)
    c_splits = split(st_slide(k).name,'_');
    if length ( c_splits) > 3
        str_name = c_splits{3};
-       if isequal(str_name,'vlade') %%% vlade diab
-           load(fullfile('../PI/exp_python/mi_delays_newdata_movingbothwindows',st_slide(k).name));
+       if isequal(str_name,'LUOISON') %%% vlade diab
+           load(fullfile('../PI/exp_python/mi_delays_newdata',st_slide(k).name));
            c_split = split(c_splits{end}, '.');
            s_ind = str2double(c_split{1}) + 1;
            Diab(:,s_ind) = mi;           
            fprintf('-----DIAB------- %s\n',st_slide(k).name)
        elseif isequal(str_name, check_name{1})
-           load(fullfile('../PI/exp_python/mi_delays_newdata_movingbothwindows',st_slide(k).name));
+           load(fullfile('../PI/exp_python/mi_delays_newdata',st_slide(k).name));
            c_split = split(c_splits{end}, '.');
            s_ind = str2double(c_split{1}) + 1;
            L13(:,s_ind) = mi;
