@@ -11,8 +11,8 @@ import scipy.io as sio
 import pdb
 
 # m_SignalsMat_laurier_micka
-patient = 6
-all_names = ['le_brun_david', 'thoraval_daniel', 'touboul_beatrice', 'legrand_cyril', 'vialatte_clement', 'vlade_catalina_diab', 'LUOISON_MAURICE_DIAB']
+patient = 7
+all_names = ['le_brun_david', 'thoraval_daniel', 'touboul_beatrice', 'legrand_cyril', 'vialatte_clement', 'vlade_catalina_diab', 'LUOISON_MAURICE_DIAB', 'CM_diabete']
 stn_record = all_names[patient]
 
 print('The current subject is: '+stn_record)
