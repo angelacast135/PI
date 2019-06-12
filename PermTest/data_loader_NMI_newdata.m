@@ -1,6 +1,6 @@
-st_slide = dir(fullfile('../PI/exp_python/mi_delays_newdata'));
+st_slide = dir(fullfile('../PI/exp_python/mi_delays_newdata_movingbothwindows')); %%%%%%%%%%%%%%%%
 st_slide(1:2) = [];
-oo = 11;
+oo = 12;
 c_signal_name = cell(1,1);
 c_signal_name{1} = 'Lozeron130919'; % contraction
 c_signal_name{2} = 'Lozeron08092016'; %NO contraction
@@ -14,19 +14,22 @@ c_signal_name{9} = 'touboul_beatrice';
 c_signal_name{10} = 'legrand_cyril';
 c_signal_name{11} = 'vialatte_clement';
 c_signal_name{12} = 'vlade_catalina_diab';
+c_signal_name{13} = 'LUOISON_MAURICE_DIAB';
 signal_name = c_signal_name{oo};
+check_name = split(signal_name, '_');
+
 
 for k = 1:length(st_slide)
    c_splits = split(st_slide(k).name,'_');
    if length ( c_splits) > 3
        str_name = c_splits{3};
-       if isequal(str_name,'vlade') %%% vlade diab
+       if isequal(str_name,'LUOISON') %%% vlade diab
            load(fullfile('../PI/exp_python/mi_delays_newdata',st_slide(k).name));
            c_split = split(c_splits{end}, '.');
            s_ind = str2double(c_split{1}) + 1;
            Diab(:,s_ind) = mi;           
            fprintf('-----DIAB------- %s\n',st_slide(k).name)
-       elseif isequal(str_name,'vialatte')
+       elseif isequal(str_name, check_name{1})
            load(fullfile('../PI/exp_python/mi_delays_newdata',st_slide(k).name));
            c_split = split(c_splits{end}, '.');
            s_ind = str2double(c_split{1}) + 1;
@@ -46,6 +49,7 @@ xlabel('time (s)'), ylabel('Norm MI Score')
 % legend('le_brun_david', signal_name, 'Location', 'northeastoutside') 
 legend('Diab', signal_name, 'Location', 'northeastoutside') 
 %% Permutation test between Diab and L13
+addpath('PermTest\')
 [m,n] = size(Diab);
 st_PermTest = struct();
 s_Alpha = 0.05;                % Nivel de confianza alfa
@@ -96,10 +100,11 @@ global_min = min(min(v_mean_Diab), min(v_mean_L13));
 
 x = find(v_pValue_mean == 1);
 y = ones(1, length(x))* (global_min - 0.05);
-hold on,
+figure(oo-6), hold on,
 plot(v_time(x), y, 'r*', 'LineWidth', 2 )
 % legend('thoraval_daniel', signal_name, 'Location', 'northeastoutside') 
-legend('Diab', signal_name, 'Location', 'northeastoutside')
+% legend('Diab', signal_name, 'Location', 'northeastoutside')
+legend('Diab', ['PA_{',num2str(oo),'}'],'Location', 'northeastoutside')
 % legend(['HS_{', num2str(oo_HS), '}'], ['PA_{', num2str(oo_PA), '}'], 'Sig p-Value', 'Location', 'northeastoutside')
 
 

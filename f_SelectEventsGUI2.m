@@ -167,18 +167,18 @@ function f_SelectEventsGUI2()
 %     s_SigInd = 8;
 %     s_PeakLevelTres = 10;  
 
-    str_FileName = 'LUOISON_MAURICE_DIAB';
+    str_FileName = 'june19_data/YA diabete';
     v_TimeSegs = [0 -1];
     s_SigInd = 8; %%%%%%%%%%%%%%%%%%
     s_PeakLevelTres = 10;
 
 %     str_FileName = 'Diab1catalina';
 %     str_FileFullName = ['./CoherenceMario/' str_FileName '.edf'];
-    str_FileFullName = ['../' str_FileName '.edf'];
+    str_FileFullName = ['./' str_FileName '.edf'];
 %     str_FileFullName = ['./data/' str_FileName '.edf'];
 %     str_DataFileName = ['./CoherenceMario/' str_FileName '.mat'];
 %     str_DataFileName = ['./data/' str_FileName '.mat'];
-    str_DataFileName = ['../' str_FileName '.mat'];
+    str_DataFileName = ['./' str_FileName '.mat'];
 
     
     if ~exist(str_FileFullName, 'file')
